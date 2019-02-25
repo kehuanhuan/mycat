@@ -1,0 +1,80 @@
+version: '2'
+
+services:
+
+  #mycat
+  mycat:
+    image: khhdocker/mycat
+    tty: true
+    networks:
+      mysql:
+        ipv4_address: 172.18.8.2
+
+  #mysql_m 数据库服务
+  mysql_m:
+    image: mysql:5.7
+    volumes:
+      - ./mysql_m:/var/lib/mysql
+    ports:
+      - "3001:3306"
+    environment:
+      MYSQL_DATABASE: homestead
+      MYSQL_USER: homestead
+      MYSQL_PASSWORD: secret
+      MYSQL_ROOT_PASSWORD: root
+    networks:
+      mysql:
+        ipv4_address: 172.18.8.3
+
+  #mysql_s1 数据库服务
+  mysql_s1:
+    image: mysql:5.7
+    volumes:
+      - ./mysql_s1:/var/lib/mysql
+    ports:
+      - "3002:3306"
+    environment:
+      MYSQL_DATABASE: homestead
+      MYSQL_USER: homestead
+      MYSQL_PASSWORD: secret
+      MYSQL_ROOT_PASSWORD: root
+    networks:
+      mysql:
+        ipv4_address: 172.18.8.4
+
+  #mysql_s2 数据库服务
+  mysql_s2:
+    image: mysql:5.7
+    volumes:
+      - ./mysql_s2:/var/lib/mysql
+    ports:
+      - "3003:3306"
+    environment:
+      MYSQL_DATABASE: homestead
+      MYSQL_USER: homestead
+      MYSQL_PASSWORD: secret
+      MYSQL_ROOT_PASSWORD: root
+    networks:
+      mysql:
+        ipv4_address: 172.18.8.5
+
+  # redis 服务，用作临时数据缓存
+  # redis:
+  #   image: redis:latest
+  #   volumes:
+  #     - redis:/data
+  #   ports:
+  #     - "6380:6379"
+
+  workspace:
+    image: khhdocker/workspace:1.1
+    tty: true
+
+networks:
+  mysql:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+      - subnet: 172.18.8.0/24
+        gateway: 172.18.8.1
