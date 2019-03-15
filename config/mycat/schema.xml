@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!DOCTYPE mycat:schema SYSTEM "schema.dtd">
+<mycat:schema xmlns:mycat="http://io.mycat/">
+
+<!-- 数据库配置，与server.xml中的数据库对应 -->
+    <schema name="homestead" checkSQLschema="false" sqlMaxLimit="100">
+        <table name="lunchmenu" dataNode="dn1"  />
+        <table name="restaurant" dataNode="dn1"  />
+        <table name="userlunch" dataNode="dn1"  />
+        <table name="users" dataNode="dn1"  />
+        <table name="dictionary" primaryKey="id" autoIncrement="true" dataNode="dn1,dn2"  rule="mod-long" />
+    </schema>
+
+<!-- 分片配置 -->
+    <dataNode name="dn1" dataHost="test1" database="homestead" />
+    <dataNode name="dn2" dataHost="test2" database="homestead" />
+
+<!-- 物理数据库配置 -->
+    <dataHost name="test1" maxCon="1000" minCon="10" balance="0"  writeType="0" dbType="mysql" dbDriver="native">
+        <heartbeat>select user();</heartbeat>
+        <writeHost host="hostM1" url="172.18.8.4:3306" user="root" password="123456"></writeHost>
+    </dataHost>
+
+    <dataHost name="test2" maxCon="1000" minCon="10" balance="0" writeType="0" dbType="mysql" dbDriver="native">
+        <heartbeat>select user();</heartbeat>
+        <writeHost host="hostS1" url="172.18.8.5:3306" user="root" password="123456"></writeHost>
+    </dataHost>
+
+</mycat:schema>

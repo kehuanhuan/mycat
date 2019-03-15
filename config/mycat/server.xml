@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<!DOCTYPE mycat:server SYSTEM "server.dtd">
+<mycat:server xmlns:mycat="http://io.mycat/">
+    <system>
+        <property name="defaultSqlParser">druidparser</property>
+    </system>
+    <user name="test">
+            <property name="password">test</property>
+            <property name="schemas">homestead</property>
+    </user>
+</mycat:server>

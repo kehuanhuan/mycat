@@ -5,10 +5,15 @@ services:
   #mycat
   mycat:
     image: khhdocker/mycat
+    volumes:
+      - ./config/mycat/rule.xml:/mycat/conf/rule.xml
+      - ./config/mycat/schema.xml:/mycat/conf/schema.xml
+      - ./config/mycat/server.xml:/mycat/conf/server.xml
     tty: true
     networks:
       mysql:
         ipv4_address: 172.18.8.2
+
 
   #mysql_m 数据库服务
   mysql_m:
@@ -21,7 +26,7 @@ services:
       MYSQL_DATABASE: homestead
       MYSQL_USER: homestead
       MYSQL_PASSWORD: secret
-      MYSQL_ROOT_PASSWORD: root
+      MYSQL_ROOT_PASSWORD: 123456
     networks:
       mysql:
         ipv4_address: 172.18.8.3
@@ -37,7 +42,7 @@ services:
       MYSQL_DATABASE: homestead
       MYSQL_USER: homestead
       MYSQL_PASSWORD: secret
-      MYSQL_ROOT_PASSWORD: root
+      MYSQL_ROOT_PASSWORD: 123456
     networks:
       mysql:
         ipv4_address: 172.18.8.4
@@ -53,7 +58,7 @@ services:
       MYSQL_DATABASE: homestead
       MYSQL_USER: homestead
       MYSQL_PASSWORD: secret
-      MYSQL_ROOT_PASSWORD: root
+      MYSQL_ROOT_PASSWORD: 123456
     networks:
       mysql:
         ipv4_address: 172.18.8.5
