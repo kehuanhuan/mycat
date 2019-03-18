@@ -4,11 +4,7 @@
 
 <!-- 数据库配置，与server.xml中的数据库对应 -->
     <schema name="homestead" checkSQLschema="false" sqlMaxLimit="100">
-        <table name="lunchmenu" dataNode="dn1"  />
-        <table name="restaurant" dataNode="dn1"  />
-        <table name="userlunch" dataNode="dn1"  />
-        <table name="users" dataNode="dn1"  />
-        <table name="dictionary" primaryKey="id" autoIncrement="true" dataNode="dn1,dn2"  rule="mod-long" />
+        <table name="users" primaryKey="id" autoIncrement="true" dataNode="dn1,dn2"  rule="mod-long" />
     </schema>
 
 <!-- 分片配置 -->
